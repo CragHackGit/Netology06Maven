@@ -1,6 +1,21 @@
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BonusServiceTest {
+
+    @ParameterizedTest
+    @CsvFileSource(files = "src/test/resources/BonusServiceTestValues.csv")
+    void shouldCalculateForRegisteredAndUnderLimit(long expected, long amount, boolean isRegistered) {
+        BonusService service = new BonusService();
+
+        long actual = service.calcBonus(amount, isRegistered);
+
+        assertEquals(expected, actual);
+    }
+}
+    /*
 
     @org.junit.jupiter.api.Test
     void shouldCalculateForRegisteredAndUnderLimit() {
@@ -135,3 +150,5 @@ public class BonusServiceTest {
         assertEquals(expected, actual);
     }
 }
+
+*/
